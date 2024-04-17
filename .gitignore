@@ -1,0 +1,10 @@
+.ipynb_checkpoints
+*.xlsx
+*.zip
+.vscode
+*.env
+/data
+/backend.env
+/frontend-config.json
+/export
+.pytest_cache

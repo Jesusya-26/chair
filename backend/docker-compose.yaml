@@ -1,0 +1,64 @@
+version: "3.9"
+services:
+  chair_db:
+    container_name: ${POSTGRES_CONTAINER_NAME:-chair_db}
+    image: library/postgres:${KC_POSTGRES_IMAGE_TAG:-15}
+    restart: on-failure
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    env_file:
+      - ./db.env
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -d postgres
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+
+  migrator:
+    container_name: migrator
+    build:
+      context: .
+      dockerfile: alembicDockerfile
+    env_file:
+      - ./.env
+    environment:
+      - DEBUG
+    depends_on:
+      chair_db:
+        condition: service_healthy
+
+  api:
+    container_name: chair_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - ${PORT:-8000}:8000
+    env_file:
+      - ./.env
+    environment:
+      - DEBUG
+    volumes:
+      - .:/app
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+    healthcheck:
+      test: curl -f http://localhost:8000/health_check/ping
+      interval: 10s
+      timeout: 5s
+      start_period: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
