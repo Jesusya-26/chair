@@ -8,3 +8,8 @@
 /frontend-config.json
 /export
 .pytest_cache
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.sublime-*
