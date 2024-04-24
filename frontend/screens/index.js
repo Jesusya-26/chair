@@ -1,2 +1,5 @@
-export { default as HomeScreen } from './HomeScreen'
+export { default as CatalogScreen } from './CatalogScreen'
 export { default as ProductScreen } from './ProductScreen'
+export { default as FavouritesScreen } from './FavouritesScreen'
+export { default as TryOnScreen } from './TryOnScreen'
+export { default as UserProfileScreen } from './UserProfileScreen'
