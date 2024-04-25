@@ -1,24 +1,19 @@
-import { React, useEffect } from 'react'
+import { React } from 'react'
 import { SafeAreaView } from 'react-native';
-import { ProductImage, ProductInfo, ARButtons } from '../components/product';
+
+import { ProductHeader, ProductInfo } from '../components/product';
+import { StatusBar } from 'expo-status-bar';
 
 
 const ProductScreen = ( {navigation, route} ) => {
 
     const product = route.params.product;
 
-    useEffect(
-        () => navigation.setOptions({
-            title: '',
-            headerTransparent: true
-        }, [navigation])
-    );
-
     return (
-        <SafeAreaView style={{backgroundColor: 'white', height: '100%', width: '100%'}}>
-            <ProductImage product_uri={ product.uri } />
-            <ProductInfo product={product}/>
-            <ARButtons />
+        <SafeAreaView style={{backgroundColor: "#E2E2E2"}}>
+            <StatusBar translucent={true} style='dark' />
+            <ProductHeader product={product} />
+            <ProductInfo product={product} navigation={navigation}/>
         </SafeAreaView>
     );
 }

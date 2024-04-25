@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { BottomNavigation } from './components';
-import { CatalogScreen, ProductScreen } from './screens';
+import { CatalogScreen, ProductScreen, TryOnScreen } from './screens';
 
 
 const Stack = createNativeStackNavigator();
@@ -13,6 +13,10 @@ function App() {
         <NavigationContainer>
             <Stack.Navigator 
                 initialRouteName="Home" 
+                screenOptions={{
+                    headerTitle: '',
+                    headerTransparent: true
+                }}
             >
                 <Stack.Screen 
                     name="Home" 
@@ -28,6 +32,10 @@ function App() {
                 <Stack.Screen 
                     name="Product" 
                     component={ProductScreen}
+                />
+                <Stack.Screen 
+                    name="ARTryOn" 
+                    component={TryOnScreen}
                 />
             </Stack.Navigator>
         </NavigationContainer>

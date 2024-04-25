@@ -1,3 +1,2 @@
-export { default as ProductImage } from './ProductImage'
+export { default as ProductHeader } from './Header'
 export { default as ProductInfo } from './ProductInfo'
-export { default as ARButtons } from './ARButtons'
