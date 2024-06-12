@@ -1,6 +1,7 @@
 """
 Exceptions connected with geometry are defined here.
 """
+
 from fastapi import status
 
 from chair_api.exceptions import ProductsApiError

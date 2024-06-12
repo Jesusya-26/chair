@@ -1,6 +1,7 @@
 """
 healthcheck endpoint is defined here.
 """
+
 from starlette import status
 
 from chair_api.schemas import PingResponse

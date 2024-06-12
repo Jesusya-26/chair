@@ -10,11 +10,14 @@ RUN sed -i '0,/version = .*/ s//version = "0.1.0"/' /app/pyproject.toml && touch
 
 WORKDIR /app
 RUN poetry config virtualenvs.create false
-RUN poetry install
+RUN poetry install --with dev
 
 COPY README.md /app/README.md
 COPY chair_api /app/chair_api
 
-RUN pip3 install .
+RUN echo "cd /app/chair_api/db" > /entrypoint.sh && \
+    echo "poetry run alembic upgrade head" >> /entrypoint.sh && \
+    echo 'if [ $? = 0 ]; then echo "Database schema syncronized"; else echo "alembic upgrade has failed, database state is not determined"; exit 1; fi' >> /entrypoint.sh
 
-CMD ["launch_chair_api"]
+ENTRYPOINT ["/bin/sh"]
+CMD ["/entrypoint.sh"]

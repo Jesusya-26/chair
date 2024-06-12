@@ -1,11 +1,13 @@
 """
 Application configuration class is defined here.
 """
+
 import os
 from dataclasses import dataclass
+
 from loguru import logger
 
-from chair_api import __version__ as api_version
+from chair_api.version import VERSION as api_version
 
 
 @dataclass
@@ -45,8 +47,7 @@ class AppSettings:
         """
         Get uri for connection with database.
         """
-        return ("postgresql+asyncpg://{user}:{password}@{host}:{port}/{database}".format(
-            **self.database_settings))
+        return "postgresql+asyncpg://{user}:{password}@{host}:{port}/{database}".format(**self.database_settings)
 
     @property
     def database_uri_sync(self) -> str:
@@ -54,7 +55,6 @@ class AppSettings:
         Get uri for connection with database.
         """
         return "postgresql://{user}:{password}@{host}:{port}/{database}".format(**self.database_settings)
-
 
     @classmethod
     def try_from_env(cls) -> "AppSettings":

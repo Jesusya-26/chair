@@ -1,15 +1,15 @@
-import traceback
 import itertools
+import traceback
 
-from loguru import logger
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from loguru import logger
 
-from .version import VERSION, LAST_UPDATE
+from .config.app_settings_global import app_settings
 from .db.connection.session import SessionManager
 from .endpoints import list_of_routes
-from .config.app_settings_global import app_settings
+from .version import LAST_UPDATE, VERSION
 
 
 def bind_routes(application: FastAPI, prefix: str) -> None:
@@ -78,8 +78,7 @@ async def internal_exception_handler(request: Request, exc: Exception) -> JSONRe
                 "path": request.url.path,
                 "params": request.url.query,
                 "trace": list(
-                    itertools.chain.from_iterable(
-                        map(lambda x: x.split("\n"), traceback.format_tb(exc.__traceback__)))
+                    itertools.chain.from_iterable(map(lambda x: x.split("\n"), traceback.format_tb(exc.__traceback__)))
                 ),
             },
             status_code=500,

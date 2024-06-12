@@ -1,17 +1,15 @@
-
 import itertools
 import os
 import sys
 import typing as tp
+
 import click
 import uvicorn
-
 from loguru import logger
 
 from chair_api.config import AppSettings
 from chair_api.config.app_settings_global import app_settings
 from chair_api.utils.dotenv import try_load_envfile
-
 
 LogLevel = tp.Literal["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"]
 
@@ -137,17 +135,17 @@ def logger_from_str(logger_text: str) -> list[tuple[LogLevel, str]]:
     help="Enable debug mode (auto-reload on change, traceback returned to user, etc.)",
 )
 def main(
-        db_addr: str,
-        db_port: int,
-        db_name: str,
-        db_user: str,
-        db_pass: str,
-        db_pool_size: int,
-        port: int,
-        host: str,
-        logger_verbosity: LogLevel,
-        additional_loggers: list[tuple[LogLevel, str]],
-        debug: bool
+    db_addr: str,
+    db_port: int,
+    db_name: str,
+    db_user: str,
+    db_pass: str,
+    db_pool_size: int,
+    port: int,
+    host: str,
+    logger_verbosity: LogLevel,
+    additional_loggers: list[tuple[LogLevel, str]],
+    debug: bool,
 ):
     """
     Taking products backend service main function, performs configuration
@@ -163,24 +161,14 @@ def main(
         db_user=db_user,
         db_pass=db_pass,
         db_pool_size=db_pool_size,
-        debug=debug
+        debug=debug,
     )
     app_settings.update(settings)
     if __name__ in ("__main__", "chair_api.__main__"):
         if debug:
-            uvicorn.run(
-                "chair_api:app",
-                host=host,
-                port=port,
-                reload=True,
-                log_level=logger_verbosity.lower()
-            )
+            uvicorn.run("chair_api:app", host=host, port=port, reload=True, log_level=logger_verbosity.lower())
         else:
-            uvicorn.run("chair_api:app",
-                        host=host,
-                        port=port,
-                        log_level=logger_verbosity.lower()
-                        )
+            uvicorn.run("chair_api:app", host=host, port=port, log_level=logger_verbosity.lower())
     else:
         if logger_verbosity != "DEBUG":
             logger.remove()

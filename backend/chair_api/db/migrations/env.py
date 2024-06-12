@@ -1,27 +1,24 @@
 """
 Environment preparation for Alembic.
 """
+
 import os
 import pathlib
 import sys
-
 
 project_dir = pathlib.Path(__file__).resolve().parent.parent.parent.parent
 sys.path.append(str(project_dir))
 from chair_api.utils.dotenv import try_load_envfile
 
-
 try_load_envfile(os.environ.get("ENVFILE", str(project_dir / ".env")))
 
-import asyncpg
 import asyncio
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-
-from alembic import context
 
 from chair_api.config.app_settings_global import AppSettings, app_settings
 from chair_api.db import DeclarativeBase

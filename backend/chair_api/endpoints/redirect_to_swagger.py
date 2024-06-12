@@ -1,6 +1,7 @@
 """
 Redirection from / and /api to swagger-ui is defined here.
 """
+
 import fastapi
 from starlette import status
 

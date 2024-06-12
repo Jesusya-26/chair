@@ -27,20 +27,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/SFProText-Bold.ttf",
-            "./assets/fonts/SFProText-Heavy.ttf",
-            "./assets/fonts/SFProText-Light.ttf",
-            "./assets/fonts/SFProText-Medium.ttf",
-            "./assets/fonts/SFProText-Regular.ttf",
-            "./assets/fonts/SFProText-Semibold.ttf"
-          ]
-        }
-      ]
+      "expo-font"
     ]
-    
   }
 }

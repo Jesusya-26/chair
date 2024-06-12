@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SF-Bold',
     fontSize: 26,
     color: 'white',
-    marginBottom: 5,
+    marginBottom: 5
   },
   subtitle: {
     fontFamily: 'SF-Regular',

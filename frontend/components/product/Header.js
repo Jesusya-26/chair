@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
     backgroundColor: "white",
-    marginBottom: 10,
+    marginBottom: 5,
     height: "60%",
   },  
   main_image: {

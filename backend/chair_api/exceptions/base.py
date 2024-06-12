@@ -1,6 +1,7 @@
 """
 Head API exception class is defined here.
 """
+
 from fastapi import HTTPException, status
 
 
@@ -19,4 +20,3 @@ class ProductsApiError(HTTPException):
             but it defaults to 500 - Internal Server Error.
         """
         return status.HTTP_500_INTERNAL_SERVER_ERROR
-    

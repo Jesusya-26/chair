@@ -67,7 +67,7 @@ const BottomNavigation = () => {
           name="TryOn"
           component={TryOnScreen}
           options={{
-            tabBarLabel: 'Примерка',
+            tabBarLabel: "Примерка",
             tabBarIcon: ({ focused, color, size }) => {
               let isFocused;
               isFocused = focused ? true : false;
@@ -79,7 +79,7 @@ const BottomNavigation = () => {
           name="UserProfile"
           component={UserProfileScreen}
           options={{
-            tabBarLabel: 'Профиль',
+            tabBarLabel: "Профиль",
             tabBarIcon: ({ focused, color, size }) => {
               let isFocused;
               isFocused = focused ? true : false;

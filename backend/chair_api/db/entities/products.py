@@ -1,7 +1,8 @@
 """
 Products table is defined here.
 """
-from sqlalchemy import Table, Column, Integer, String, Sequence, ForeignKey, Numeric
+
+from sqlalchemy import Column, Float, ForeignKey, Integer, Sequence, String, Table
 from sqlalchemy.dialects.postgresql import JSONB
 
 from chair_api.db import metadata
@@ -11,13 +12,16 @@ products_id_seq = Sequence("products_id_seq")
 products = Table(
     "products",
     metadata,
-    Column("id", Integer, primary_key=True, server_default=products_id_seq.next_value()),
-    Column("type_id", Integer, ForeignKey("product_types.id")),
+    Column("product_id", Integer, primary_key=True, server_default=products_id_seq.next_value()),
+    Column("product_type_id", Integer, ForeignKey("product_types.product_type_id"), nullable=False),
     Column("name", String, nullable=False),
+    Column("product_url", String, nullable=False),
     Column("description", String, nullable=False),
-    Column("manufacture", String, nullable=False),
-    Column("price", Numeric(2, 1), nullable=False),
-    Column("characteristics", JSONB)
+    Column("manufacture", String, nullable=True),
+    Column("price", Float, nullable=False),
+    Column("properties", JSONB),
+    Column("rating", Float),
+    Column("qty_califications", Integer),
 )
 
 """
